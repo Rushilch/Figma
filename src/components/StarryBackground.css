@@ -1,0 +1,122 @@
+/* src/components/PromptContainer.css */
+
+.prompt-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 800px;
+  margin-top: 3rem;
+}
+
+.prompt-textarea {
+  width: 100%;
+  min-height: 150px;
+  padding: 1rem;
+  font-family: inherit;
+  font-size: 1rem;
+  border: 2px solid #495057;
+  border-radius: 12px;
+  resize: vertical;
+  transition: border-color 0.3s, box-shadow 0.3s, background-color 0.3s;
+  box-sizing: border-box;
+  background-color: rgba(255, 255, 255, 0.05);
+  color: #f8f9fa;
+}
+
+.prompt-textarea:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 10px rgba(0, 123, 255, 0.25);
+}
+
+/* --- UPGRADED BUTTON STYLE --- */
+
+.generate-button {
+  position: relative;
+  padding: 0.8rem 2.5rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #fff;
+  border-radius: 50px;
+  cursor: pointer;
+  background-color: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+  overflow: hidden;
+  /* Ensure the button maintains its size when the spinner appears */
+  min-width: 150px;
+  min-height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.generate-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 100%;
+  background: linear-gradient(
+    115deg,
+    transparent 20%,
+    rgba(93, 173, 226, 0.8),
+    rgba(165, 105, 189, 0.8),
+    transparent 80%
+  );
+  transition: all 0.5s ease;
+  transform: translateX(-100%);
+  z-index: -1;
+  opacity: 0;
+}
+
+.generate-button:hover::before {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.generate-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.generate-button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+/* --- NEW LOADING AND DISABLED STYLES --- */
+
+/* Style for when the button is disabled */
+.generate-button:disabled {
+  cursor: not-allowed;
+  transform: translateY(0); /* Prevent hover effect */
+  box-shadow: none;
+  opacity: 0.7;
+}
+
+.generate-button:disabled::before {
+  transform: translateX(-100%); /* Keep the gradient hidden */
+  opacity: 0;
+}
+
+/* The loading spinner animation */
+.loading-spinner {
+  width: 24px;
+  height: 24px;
+  border: 3px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
